@@ -48,3 +48,11 @@
 (def formatter (java.text.DateFormat/getDateInstance))
 (def x (.format formatter (.getTime calendar))) ; -> "Aug 1, 1981"
 (println x)
+
+;memfn macro for calling java methods instead of using anonymous functions
+
+(println (map #(.substring %1 %2)
+	 ["Moe" "Larry" "Curly"] [1 2 3])) ; -> (oe rry ly)
+
+(println (map (memfn substring beginIndex)
+	 ["Moe" "Larry" "Curly"] [1 2 3])) ;
