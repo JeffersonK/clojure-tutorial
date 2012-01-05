@@ -81,3 +81,15 @@
 
 (def blah (get-in person [:poop]))
 (println blah)
+
+; the following are equivalent
+; (f1 (f2 (f3 x)))
+; (-> x f3 f2 f1)
+
+(def person-mod (assoc-in person [:employer :address :city] "Clayton"))
+
+(println person \newline)
+(println person-mod \newline)
+
+(def u (update-in person [:employer :address :zip] str "-1234")) ; using the str function
+(println u)
