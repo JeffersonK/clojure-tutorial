@@ -34,3 +34,6 @@
 
 (def x-string (filter #(instance? String %) x))
 (println x-string)
+
+(println (peek x))
+(println (pop x))
