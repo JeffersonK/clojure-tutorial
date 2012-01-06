@@ -14,7 +14,7 @@
 (println (popsicle-map :green))
 (println (:green popsicle-map))
 
-; contains? operates on sets and maps
+; contains? operates on sets and maps 
 
 (println (contains? popsicle-map :green)) ; -> true
 
@@ -40,7 +40,6 @@
 (doseq [[color flavor] popsicle-map]
        (println (str "The flavor of " (name color)
        " popsicles is " (name flavor) ".")))
-
 
 ; select-keys takes a map and a sequence of keys, returns map where only selected keys are in the map
 

@@ -109,6 +109,8 @@
   ; The extra exponent will be ignored.
   (let [exponents (reverse (range (count coefs)))
         derivative-coefs (map #(* %1 %2) (butlast coefs) exponents)]
+    (println exponents)
+    (println derivative-coefs)
     (polynomial derivative-coefs x)))
 
 (def f (partial polynomial [2 1 3])) ; 2x^2 + x + 3
@@ -116,3 +118,31 @@
 
 (println "f(2) =" (f 2)) ; -> 13.0
 (println "f'(2) =" (f-prime 2)) ; -> 9.0
+
+;%1 = a, %2 = b, result is ax + b
+;%1 = ax + b, %2 = c, result is (ax + b)x + c = ax^2 + bx + c 
+(defn- polynomial2
+  "computes the value of a polynomial
+   with the given coefficients for a given value x"
+  [coefs x]
+  (reduce #(+ (* x %1) %2) coefs))
+(println (polynomial2 [1 2 3] 3))
+
+                                        ; memoize
+
+; Note the use of def instead of defn because memoize returns
+; a function that is then bound to "memo-f".
+(def memo-f (memoize f))
+
+(println "priming call")
+(time (f 2))
+
+(println "without memoization")
+; Note the use of an underscore for the binding that isn't used.
+(dotimes [_ 3] (time (f 2)))
+
+(println "with memoization")
+(dotimes [_ 3] (time (memo-f 2)))
+
+
+
